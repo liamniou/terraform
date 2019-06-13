@@ -7,3 +7,6 @@
 
 # Sensitive Files
 /*.tfvars
+
+# GSheets tokens
+*.pickle
