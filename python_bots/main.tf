@@ -106,6 +106,28 @@ data "template_file" "transmission_management_bot_setup_script" {
   }
 }
 
+data "template_file" "zoya_monitoring_bot_setup_script" {
+  template = "${file("templates/setup_zoya_monitoring_bot.tpl")}"
+  vars = {
+    token          = "${var.zoya_monitoring_bot.token}"
+    scope          = "${var.zoya_monitoring_bot.scope}"
+    spreadsheet_id = "${var.zoya_monitoring_bot.spreadsheet_id}"
+    sheet_id       = "${var.zoya_monitoring_bot.sheet_id}"
+  }
+}
+
+data "template_file" "shared_budget_bot_setup_script" {
+  template = "${file("templates/setup_shared_budget_bot.tpl")}"
+  vars = {
+    token          = "${var.shared_budget_bot.token}"
+    person_1_tg_id = "${var.shared_budget_bot.person_1_tg_id}"
+    person_2_tg_id = "${var.shared_budget_bot.person_2_tg_id}"
+    scope          = "${var.shared_budget_bot.scope}"
+    spreadsheet_id = "${var.shared_budget_bot.spreadsheet_id}"
+    sheet_id       = "${var.shared_budget_bot.sheet_id}"
+  }
+}
+
 resource "aws_instance" "python" {
   ami                         = "${data.aws_ami.ubuntu.id}"
   instance_type               = "t2.micro"
@@ -125,6 +147,26 @@ resource "aws_instance" "python" {
     content     = "${data.template_file.transmission_management_bot_setup_script.rendered}"
   }
 
+  provisioner "file" {
+    destination = "/home/ubuntu/setup_3.sh"
+    content     = "${data.template_file.zoya_monitoring_bot_setup_script.rendered}"
+  }
+
+  provisioner "file" {
+    destination = "/home/ubuntu/setup_4.sh"
+    content     = "${data.template_file.shared_budget_bot_setup_script.rendered}"
+  }
+
+  provisioner "file" {
+    source = "zoya.pickle"
+    destination = "/tmp/zoya.pickle"
+  }
+
+  provisioner "file" {
+    source = "budget.pickle"
+    destination = "/tmp/budget.pickle"
+  }
+
   provisioner "remote-exec" {
     inline = [
       "curl -fsSL https://get.docker.com -o get-docker.sh && sudo sh get-docker.sh",
@@ -136,6 +178,8 @@ resource "aws_instance" "python" {
     inline = [
       "sudo sh /home/ubuntu/setup_1.sh",
       "sudo sh /home/ubuntu/setup_2.sh",
+      "sudo sh /home/ubuntu/setup_3.sh",
+      "sudo sh /home/ubuntu/setup_4.sh",
     ]
   }
 
