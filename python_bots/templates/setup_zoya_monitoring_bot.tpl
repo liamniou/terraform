@@ -11,4 +11,4 @@ spreadsheet_id = ${spreadsheet_id}
 sheet_id = ${sheet_id}
 EOL
 docker build -t zoya_monitoring_bot_image .
-docker run -dit --restart unless-stopped --name=zoya_monitoring_bot -v zoya_monitoring_bot_app:/app zoya_monitoring_bot_image
+docker run -dit -e TZ=Europe/Minsk --restart unless-stopped --name=zoya_monitoring_bot -v zoya_monitoring_bot_app:/app zoya_monitoring_bot_image

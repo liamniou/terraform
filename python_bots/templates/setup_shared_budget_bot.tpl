@@ -14,4 +14,4 @@ spreadsheet_id = ${spreadsheet_id}
 sheet_id = ${sheet_id}
 EOL
 docker build -t shared_budget_bot_image .
-docker run -dit --restart unless-stopped --name=shared_budget_bot -v shared_budget_bot_app:/app shared_budget_bot_image
+docker run -dit -e TZ=Europe/Minsk --restart unless-stopped --name=shared_budget_bot -v shared_budget_bot_app:/app shared_budget_bot_image
