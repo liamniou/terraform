@@ -8,22 +8,47 @@ variable "aws_region" {
   default = "eu-west-1"
 }
 
-variable "rutracker_notifier_bot" {
-  description = "Map variable with TG token, DB name, rutracker login and password"
-  type        = "map"
+variable "rutracker_notifier_bot_token" {
 }
 
-variable "transmission_management_bot" {
-  description = "Map variable with TG token, transmission host, port, user, password and download dir"
-  type        = "map"
+variable "transmission_management_bot_token" {
 }
 
-variable "zoya_monitoring_bot" {
-  description = "Map variable with TG token, scope, shreadsheet ID, sheet ID"
-  type        = "map"
+variable "transmission_host" {
 }
 
-variable "shared_budget_bot" {
-  description = "Map variable with TG token, TG IDs, scope, shreadsheet ID, sheet ID"
-  type        = "map"
+variable "transmission_port" {
+}
+
+variable "transmission_user" {
+}
+
+variable "transmission_password" {
+}
+
+variable "transmission_download_dir" {
+}
+
+variable "shared_budget_bot_token" {
+}
+
+variable "person_1_tg_id" {
+}
+
+variable "person_2_tg_id" {
+}
+
+variable "scope" {
+}
+
+variable "spreadsheet_id" {
+}
+
+variable "sheet_id" {
+}
+
+variable "budget_pickle_gdrive_id" {
+}
+
+variable "personal_key_pem" {
 }

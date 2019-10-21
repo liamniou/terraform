@@ -1,7 +1,7 @@
 #!/bin/bash
 cd ~
 git clone https://github.com/liamniou/shared_budget_bot.git && cd shared_budget_bot
-cp /tmp/budget.pickle ./app/token.pickle
+wget --no-check-certificate 'https://docs.google.com/uc?export=download&id=${pickle_gdrive_id}' -O ./app/token.pickle
 cat > ./app/config << EOL
 [telegram]
 token = ${token}
