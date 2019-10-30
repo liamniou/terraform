@@ -52,3 +52,6 @@ variable "budget_pickle_gdrive_id" {
 
 variable "personal_key_pem" {
 }
+
+variable "mongo_connection_string" {
+}

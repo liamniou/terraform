@@ -86,7 +86,8 @@ resource "aws_security_group" "ec2_public_security_group" {
 data "template_file" "rutracker_notifier_bot_setup_script" {
   template = "${file("templates/setup_rutracker_notifier_bot.tpl")}"
   vars = {
-    token = "${var.rutracker_notifier_bot_token}"
+    token                   = "${var.rutracker_notifier_bot_token}"
+    mongo_connection_string = "${var.mongo_connection_string}" 
   }
 }
 
