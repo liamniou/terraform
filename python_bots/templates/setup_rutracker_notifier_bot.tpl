@@ -10,3 +10,6 @@ echo $${URL}
 docker-compose build
 docker-compose up -d
 curl $${URL}
+echo "0 * * * * curl localhost:5000/check_subscription_updates" >> mycron
+crontab mycron
+rm mycron
