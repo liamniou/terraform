@@ -155,7 +155,7 @@ resource "aws_instance" "python" {
 
   provisioner "remote-exec" {
     inline = [
-      "sudo sh /home/ubuntu/setup_1.sh",
+      "sudo sh /home/ubuntu/setup_1.sh CI",
       "sudo sh /home/ubuntu/setup_2.sh",
       "sudo sh /home/ubuntu/setup_3.sh"
     ]
