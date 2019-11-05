@@ -17,7 +17,7 @@ fi;
 compose_setup() {
   docker-compose up -d ngrok 
   sleep 5
-  URL=$(curl $(docker port ngrok 4040)/api/tunnels | python3 -c "import sys, json; print(json.load(sys.stdin)['tunnels'][0]['public_url'])")
+  URL=$(curl $(docker port ngrok 4040)/api/tunnels | python3 -c "import sys, json; print(json.load(sys.stdin)['tunnels'][0]['public_url'].replace('http://', 'https://'))")
   echo "URL=$${URL}" > ./.env
   echo "TOKEN=${token}" >> ./.env
   echo "MONGO_CONNECTION_STRING=${mongo_connection_string}" >> ./.env
