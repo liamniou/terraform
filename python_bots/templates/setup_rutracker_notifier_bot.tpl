@@ -33,7 +33,7 @@ if [ ! -z $1 ]; then
   compose_setup
   echo "PATH=/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/bin" >> mycron
   echo "SHELL=/bin/bash" >> mycron
-  echo "0 */9 * * * cd /home/ubuntu/rutracker_notifier && docker-compose down && bash /home/ubuntu/setup_1.sh" >> mycron
+  echo "0 */7 * * * /home/ubuntu/setup_1.sh >> /var/log/cron.log" >> mycron
   echo "10 * * * * curl localhost:5000/check_subscription_updates" >> mycron
   crontab mycron
   rm mycron
