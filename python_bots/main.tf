@@ -9,8 +9,8 @@ resource "aws_vpc" "personal-vpc" {
 
 resource "aws_subnet" "public-subnet-1" {
   cidr_block        = "10.0.1.0/24"
-  vpc_id            = "${aws_vpc.personal-vpc.id}"
-  availability_zone = "eu-west-1a"
+  vpc_id            = aws_vpc.personal-vpc.id
+  availability_zone = "us-east-1a"
 
   tags = {
     Name = "Public-Subnet-1"
@@ -18,7 +18,7 @@ resource "aws_subnet" "public-subnet-1" {
 }
 
 resource "aws_internet_gateway" "production-igw" {
-  vpc_id = "${aws_vpc.personal-vpc.id}"
+  vpc_id = aws_vpc.personal-vpc.id
 
   tags = {
     Name = "Personal-IGW"
@@ -26,11 +26,11 @@ resource "aws_internet_gateway" "production-igw" {
 }
 
 resource "aws_route_table" "public-route-table" {
-  vpc_id = "${aws_vpc.personal-vpc.id}"
+  vpc_id = aws_vpc.personal-vpc.id
 
   route {
     cidr_block = "0.0.0.0/0"
-    gateway_id = "${aws_internet_gateway.production-igw.id}"
+    gateway_id = aws_internet_gateway.production-igw.id
   }
 
   tags = {
@@ -39,20 +39,20 @@ resource "aws_route_table" "public-route-table" {
 }
 
 resource "aws_route_table_association" "public-subnet-1-association" {
-  route_table_id = "${aws_route_table.public-route-table.id}"
-  subnet_id      = "${aws_subnet.public-subnet-1.id}"
+  route_table_id = aws_route_table.public-route-table.id
+  subnet_id      = aws_subnet.public-subnet-1.id
 }
 
 resource "aws_route" "public-internet-gw-route" {
-  route_table_id         = "${aws_route_table.public-route-table.id}"
-  gateway_id             = "${aws_internet_gateway.production-igw.id}"
+  route_table_id         = aws_route_table.public-route-table.id
+  gateway_id             = aws_internet_gateway.production-igw.id
   destination_cidr_block = "0.0.0.0/0"
 }
 
 resource "aws_security_group" "ec2_public_security_group" {
   name = "EC2-Public-SG"
   description = "Internet reaching access for EC2 Instances"
-  vpc_id = "${aws_vpc.personal-vpc.id}"
+  vpc_id = aws_vpc.personal-vpc.id
 
   ingress {
     from_port = 80
@@ -84,35 +84,35 @@ resource "aws_security_group" "ec2_public_security_group" {
 }
 
 data "template_file" "rutracker_notifier_bot_setup_script" {
-  template = "${file("templates/setup_rutracker_notifier_bot.tpl")}"
+  template = file("templates/setup_rutracker_notifier_bot.tpl")
   vars = {
-    token                   = "${var.rutracker_notifier_bot_token}"
-    mongo_connection_string = "${var.mongo_connection_string}" 
+    token                   = var.rutracker_notifier_bot_token
+    mongo_connection_string = var.mongo_connection_string
   }
 }
 
 data "template_file" "transmission_management_bot_setup_script" {
-  template = "${file("templates/setup_transmission_management_bot.tpl")}"
+  template = file("templates/setup_transmission_management_bot.tpl")
   vars = {
-    token                     = "${var.transmission_management_bot_token}"
-    transmission_host         = "${var.transmission_host}"
-    transmission_port         = "${var.transmission_port}"
-    transmission_user         = "${var.transmission_user}"
-    transmission_password     = "${var.transmission_password}"
-    transmission_download_dir = "${var.transmission_download_dir}"
+    token                     = var.transmission_management_bot_token
+    transmission_host         = var.transmission_host
+    transmission_port         = var.transmission_port
+    transmission_user         = var.transmission_user
+    transmission_password     = var.transmission_password
+    transmission_download_dir = var.transmission_download_dir
   }
 }
 
 data "template_file" "shared_budget_bot_setup_script" {
-  template = "${file("templates/setup_shared_budget_bot.tpl")}"
+  template = file("templates/setup_shared_budget_bot.tpl")
   vars = {
-    token            = "${var.shared_budget_bot_token}"
-    person_1_tg_id   = "${var.person_1_tg_id}"
-    person_2_tg_id   = "${var.person_2_tg_id}"
-    scope            = "${var.scope}"
-    spreadsheet_id   = "${var.spreadsheet_id}"
-    sheet_id         = "${var.sheet_id}"
-    pickle_gdrive_id = "${var.budget_pickle_gdrive_id}"
+    token            = var.shared_budget_bot_token
+    person_1_tg_id   = var.person_1_tg_id
+    person_2_tg_id   = var.person_2_tg_id
+    scope            = var.scope
+    spreadsheet_id   = var.spreadsheet_id
+    sheet_id         = var.sheet_id
+    pickle_gdrive_id = var.budget_pickle_gdrive_id
   }
 }
 
@@ -122,27 +122,27 @@ resource "aws_key_pair" "ssh_key" {
 }
 
 resource "aws_instance" "python" {
-  ami                         = "${data.aws_ami.ubuntu.id}"
+  ami                         = data.aws_ami.ubuntu.id
   instance_type               = "t2.nano"
-  key_name                    = "${aws_key_pair.ssh_key.key_name}"
-  subnet_id                   = "${aws_subnet.public-subnet-1.id}"
-  security_groups             = ["${aws_security_group.ec2_public_security_group.id}"]
+  key_name                    = aws_key_pair.ssh_key.key_name
+  subnet_id                   = aws_subnet.public-subnet-1.id
+  security_groups             = [aws_security_group.ec2_public_security_group.id]
   associate_public_ip_address = true
   source_dest_check           = false
 
   provisioner "file" {
     destination = "/home/ubuntu/setup_1.sh"
-    content     = "${data.template_file.rutracker_notifier_bot_setup_script.rendered}"
+    content     = data.template_file.rutracker_notifier_bot_setup_script.rendered
   }
 
   provisioner "file" {
     destination = "/home/ubuntu/setup_2.sh"
-    content     = "${data.template_file.transmission_management_bot_setup_script.rendered}"
+    content     = data.template_file.transmission_management_bot_setup_script.rendered
   }
 
   provisioner "file" {
     destination = "/home/ubuntu/setup_3.sh"
-    content     = "${data.template_file.shared_budget_bot_setup_script.rendered}"
+    content     = data.template_file.shared_budget_bot_setup_script.rendered
   }
 
   provisioner "remote-exec" {
@@ -162,9 +162,9 @@ resource "aws_instance" "python" {
   }
 
   connection {
-    host        = "${aws_instance.python.public_ip}"
+    host        = aws_instance.python.public_ip
     type        = "ssh"
     user        = "ubuntu"
-    private_key = "${var.personal_key_pem}"
+    private_key = var.personal_key_pem
   }
 }
