@@ -55,3 +55,4 @@ variable "personal_key_pem" {
 
 variable "mongo_connection_string" {
 }
+variable "public_key" {}

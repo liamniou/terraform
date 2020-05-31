@@ -118,7 +118,7 @@ data "template_file" "shared_budget_bot_setup_script" {
 
 resource "aws_key_pair" "ssh_key" {
   key_name   = "ssh_key"
-  public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCGuEH5ecemOkUQCUTayfuBlFQn+kDUbZ9WA/qBag3mRY1rIxpUnSl02hfJ+nZiMJJXyHmIpsM177KMasX2lDiLMzbzVv8jhqpeFf5udGbfZsh5PsCMRbvIFHgSlKYbg0sMR+7KpXkv+a0FUeAOm6NarUbYJpBEJ0FAm5D+tvf8NXgs2k4ovZborslbttzw8S7EyiWkSm7LSfYYe5hVHbqbPDeG4dIOFEaXC5HRMJPdW2gQzaBxPjf967STH5caAS54ljoyRUM13dCd7CN/hZlzphPjp9gBIegsDVlmsY7HE1MV7bvCd+JzY3+lRS3nO65OYqv2pf196aJajIRIIKCt"
+  public_key = var.public_key
 }
 
 resource "aws_instance" "python" {
