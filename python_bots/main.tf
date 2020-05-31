@@ -123,7 +123,7 @@ resource "aws_key_pair" "ssh_key" {
 
 resource "aws_instance" "python" {
   ami                         = "${data.aws_ami.ubuntu.id}"
-  instance_type               = "t2.micro"
+  instance_type               = "t2.nano"
   key_name                    = "${aws_key_pair.ssh_key.key_name}"
   subnet_id                   = "${aws_subnet.public-subnet-1.id}"
   security_groups             = ["${aws_security_group.ec2_public_security_group.id}"]
