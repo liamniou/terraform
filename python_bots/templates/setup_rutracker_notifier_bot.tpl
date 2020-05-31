@@ -5,7 +5,7 @@ if hash docker-compose 2>/dev/null; then
   DC_NOT_DEFINED=0
 fi;
 
-if [[ ${DC_NOT_DEFINED} > 0 ]]; then
+if [[ $${DC_NOT_DEFINED} > 0 ]]; then
   echo "* docker-compose not defined, make alias"
   docker-compose() {
       /usr/local/bin/docker-compose "$@"
