@@ -1,19 +1,5 @@
 #!/bin/bash
 
-DC_NOT_DEFINED=1
-if hash docker-compose 2>/dev/null; then
-  DC_NOT_DEFINED=0
-fi;
-
-if [[ $${DC_NOT_DEFINED} > 0 ]]; then
-  echo "* docker-compose not defined, make alias"
-  docker-compose() {
-      /usr/local/bin/docker-compose "$@"
-  }
-  export -f docker-compose
-  docker-compose -v
-fi;
-
 compose_setup() {
   docker-compose up -d ngrok 
   sleep 5
