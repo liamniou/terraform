@@ -1,3 +1,3 @@
 output "ip" {
-  value = aws_instance.python.public_ip
+  value = digitalocean_droplet.bots.ipv4_address
 }

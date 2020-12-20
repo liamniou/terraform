@@ -1,2 +1,14 @@
-.terraform
-.idea
+# Compiled files
+**/*.tfstate
+**/*.tfstate.backup
+
+# Module directory
+**/.terraform/
+
+# Sensitive Files
+**/*.tfvars
+
+# GSheets tokens
+**/*.pickle
+
+**/*.lock.hcl

@@ -1,58 +1,69 @@
-variable "aws_access_key" {
+variable "do_token" {
+  description = "DigitalOcean API access token"
 }
 
-variable "aws_secret_key" {
-}
+# Shared Budget Bot
 
-variable "aws_region" {
-  default = "us-east-1"
-}
-
-variable "rutracker_notifier_bot_token" {
-}
-
-variable "transmission_management_bot_token" {
-}
-
-variable "transmission_host" {
-}
-
-variable "transmission_port" {
-}
-
-variable "transmission_user" {
-}
-
-variable "transmission_password" {
-}
-
-variable "transmission_download_dir" {
+variable "shared_budget_bot_pickle_gdrive_id" {
+  description = "Google Sheets pickle ID"
 }
 
 variable "shared_budget_bot_token" {
+  description = "Telegram bot token for Shared Budget bot"
 }
 
 variable "person_1_tg_id" {
+  description = "Shared Budget bot person_1 Telegram ID"
 }
 
 variable "person_2_tg_id" {
+  description = "Shared Budget bot person_2 Telegram ID"
 }
 
 variable "scope" {
+  description = "Shared Budget bot Google Sheets Scope URL"
 }
 
 variable "spreadsheet_id" {
+  description = "Shared Budget bot Google Sheets Spreadsheet ID"
 }
 
 variable "sheet_id" {
+  description = "Shared Budget bot Google Sheets Sheet ID"
 }
 
-variable "budget_pickle_gdrive_id" {
+variable "transmission_management_bot_token" {
+  description = "Telegram bot token for Transmission management bot"
 }
 
-variable "personal_key_pem" {
+variable "transmission_host" {
+  default     = "localhost" 
+  description = "Transmission host"
 }
 
-variable "mongo_connection_string" {
+variable "transmission_port" {
+  default = "9091"
+  description = "Transmission port"
 }
-variable "public_key" {}
+
+variable "transmission_user" {
+  default     = "transmission"
+  description = "Transmission user"
+}
+
+variable "transmission_password" {
+  default     = "transmission"
+  description = "Transmission password"
+}
+
+variable "transmission_download_dir" {
+  default     = "/tmp/downloads"
+  description = "Transmission download dir"
+}
+
+// variable "rutracker_notifier_bot_token" {
+//   description = "Telegram bot token for rutracker_notifier_bot"
+// }
+
+// variable "mongo_connection_string" {
+// }
