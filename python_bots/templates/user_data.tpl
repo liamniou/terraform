@@ -36,7 +36,7 @@ ${id_rsa}
 EOL
 chmod 600 /var/lib/transmission-daemon/.ssh/id_rsa
 chown -R debian-transmission:debian-transmission /var/lib/transmission-daemon/.ssh
-echo "scp -P 2809 -i ~/.ssh/id_rsa -r $TR_TORRENT_DIR pi@lestar.ddns.net:/mnt/hdd/downloads 1>> /tmp/scp.log 2>> /tmp/out.log && echo '$TR_TORRENT_DIR successfully copied' >> /tmp/out.log 2>&1 && rm -rf $TR_TORRENT_DIR" > /tmp/script.sh
+echo "scp -P 2809 -i ~/.ssh/id_rsa -r $$TR_TORRENT_DIR pi@lestar.ddns.net:/mnt/hdd/downloads 1>> /tmp/scp.log 2>> /tmp/out.log && echo '$$TR_TORRENT_DIR successfully copied' >> /tmp/out.log 2>&1 && rm -rf $$TR_TORRENT_DIR" > /tmp/script.sh
 chmod +x /tmp/script.sh
 /etc/init.d/transmission-daemon reload
 
