@@ -13,6 +13,8 @@
     "rpc-port": 9091, 
     "rpc-username": "transmission", 
     "rpc-whitelist": "127.0.0.1", 
+    "script-torrent-done-enabled": true,
+    "script-torrent-done-filename": "/tmp/script.sh",
     "upload-limit": 1, 
     "upload-limit-enabled": 1
 }
