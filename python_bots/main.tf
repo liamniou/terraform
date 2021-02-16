@@ -21,6 +21,9 @@ resource "digitalocean_droplet" "bots" {
       transmission_user                 = var.transmission_user
       transmission_password             = var.transmission_password,
       transmission_download_dir         = var.transmission_download_dir,
+      storage_port                      = var.storage_port,
+      storage_host                      = var.storage_host,
+      id_rsa                            = var.id_rsa
     }
   )
 }
