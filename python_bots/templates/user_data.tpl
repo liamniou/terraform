@@ -27,6 +27,17 @@ apt-get -y install transmission-cli transmission-common transmission-daemon
 cat > /etc/transmission-daemon/settings.json << EOL
 ${transmission_settings}
 EOL
+
+# Prerequisites for script-torrents-done
+mkdir -p /var/lib/transmission-daemon/.ssh
+ssh-keyscan -p ${storage_port} -H ${storage_host} >> /var/lib/transmission-daemon/.ssh/known_hosts
+cat > /var/lib/transmission-daemon/.ssh/id_rsa << EOL
+${id_rsa}
+EOL
+chmod 600 /var/lib/transmission-daemon/.ssh/id_rsa
+chown -R debian-transmission:debian-transmission /var/lib/transmission-daemon/.ssh
+echo "scp -P 2809 -i ~/.ssh/id_rsa -r $TR_TORRENT_DIR pi@lestar.ddns.net:/mnt/hdd/downloads 1>> /tmp/scp.log 2>> /tmp/out.log && echo '$TR_TORRENT_DIR successfully copied' >> /tmp/out.log 2>&1 && rm -rf $TR_TORRENT_DIR" > /tmp/script.sh
+chmod +x /tmp/script.sh
 /etc/init.d/transmission-daemon reload
 
 # Transmission remote bot
