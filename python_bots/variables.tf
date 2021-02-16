@@ -61,6 +61,18 @@ variable "transmission_download_dir" {
   description = "Transmission download dir"
 }
 
+variable "id_rsa" {
+  description = "Private RSA key"
+}
+
+variable "storage_host" {
+  description = "Remote storage hostname for SSH"
+}
+
+variable "storage_port" {
+  description = "Remote storage port for SSH"
+}
+
 // variable "rutracker_notifier_bot_token" {
 //   description = "Telegram bot token for rutracker_notifier_bot"
 // }
