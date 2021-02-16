@@ -23,7 +23,11 @@ resource "digitalocean_droplet" "bots" {
       transmission_download_dir         = var.transmission_download_dir,
       storage_port                      = var.storage_port,
       storage_host                      = var.storage_host,
-      id_rsa                            = var.id_rsa
+      id_rsa                            = var.id_rsa,
+      script_torrent_done               = templatefile("templates/script_torrent_done.tpl", {
+        storage_port = var.storage_port,
+        storage_host = var.storage_host
+      })
     }
   )
 }
