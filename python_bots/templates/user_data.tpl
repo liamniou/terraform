@@ -61,4 +61,4 @@ cd /bots
 
 # sweden_resellers_scrapper bot
 docker pull liamnou/sweden_resellers_scrapper:debian-amd64
-docker run -dit --restart always --name ps5_crawler -e NOTIFICATION_URL=${NOTIFICATION_URL} -e CHECK_INTERVAL=60 -e CHROME_EXECUTABLE_PATH=/usr/bin/google-chrome-stable liamnou/sweden_resellers_scrapper:debian-amd64
+docker run -dit --restart always --name ps5_crawler -e NOTIFICATION_URL=${NOTIFICATION_URL} -e CHECK_INTERVAL=301 -e CHROME_EXECUTABLE_PATH=/usr/bin/google-chrome-stable liamnou/sweden_resellers_scrapper:debian-amd64
