@@ -79,3 +79,8 @@ variable "storage_port" {
 
 // variable "mongo_connection_string" {
 // }
+
+# Scrapper bot
+variable "NOTIFICATION_URL" {
+  description = "API endpoint to send notification message to"
+}

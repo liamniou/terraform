@@ -27,7 +27,8 @@ resource "digitalocean_droplet" "bots" {
       script_torrent_done               = templatefile("templates/script_torrent_done.tpl", {
         storage_port = var.storage_port,
         storage_host = var.storage_host
-      })
+      }),
+      NOTIFICATION_URL = var.NOTIFICATION_URL,
     }
   )
 }
