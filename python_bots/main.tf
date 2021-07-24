@@ -6,7 +6,7 @@ resource "digitalocean_droplet" "bots" {
   ssh_keys = ["29239323"]
 
   user_data = templatefile(
-    "templates/user_data.tpl", { 
+    "templates/user_data.tpl", {
       shared_budget_bot_token           = var.shared_budget_bot_token,
       pickle_gdrive_id                  = var.shared_budget_bot_pickle_gdrive_id, 
       person_1_tg_id                    = var.person_1_tg_id,
@@ -26,7 +26,9 @@ resource "digitalocean_droplet" "bots" {
       id_rsa                            = var.id_rsa,
       script_torrent_done               = templatefile("templates/script_torrent_done.tpl", {
         storage_port = var.storage_port,
-        storage_host = var.storage_host
+        storage_host = var.storage_host,
+        bot_token = var.transmission_management_bot_token,
+        tg_id = var.person_1_tg_id
       }),
       NOTIFICATION_URL = var.NOTIFICATION_URL,
     }
