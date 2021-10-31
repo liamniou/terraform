@@ -14,7 +14,11 @@ resource "digitalocean_droplet" "bots" {
       scope                             = var.scope,
       spreadsheet_id                    = var.spreadsheet_id,
       sheet_id                          = var.sheet_id,
-      transmission_settings             = templatefile("templates/transmission_settings.tpl", {}),
+      transmission_settings             = templatefile("templates/transmission_settings.tpl", {
+        transmission_user = var.transmission_user
+        transmission_password = var.transmission_password
+        transmission_port = var.transmission_port
+      }),
       transmission_management_bot_token = var.transmission_management_bot_token,
       transmission_host                 = var.transmission_host,
       transmission_port                 = var.transmission_port,

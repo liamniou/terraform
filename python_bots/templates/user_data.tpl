@@ -27,6 +27,7 @@ apt-get -y install transmission-cli transmission-common transmission-daemon
 cat > /etc/transmission-daemon/settings.json << EOL
 ${transmission_settings}
 EOL
+sed -i "s/127.0.0.1/127.0.0.1,$(dig +short ${storage_host})/" /etc/transmission-daemon/settings.json
 
 # Prerequisites for script-torrents-done
 mkdir -p /var/lib/transmission-daemon/.ssh
@@ -41,21 +42,22 @@ ${script_torrent_done}
 EOL
 chmod +x /tmp/script.sh
 /etc/init.d/transmission-daemon reload
+ufw allow ${transmission_port}
 
 # Transmission remote bot
-git clone https://github.com/liamniou/transmission_mgmt_bot && cd transmission_mgmt_bot
-cat > ./app/config << EOL
-[telegram]
-token = ${transmission_management_bot_token}
-[transmission]
-transmission_host = ${transmission_host}
-transmission_port = ${transmission_port}
-transmission_user = ${transmission_user}
-transmission_password = ${transmission_password}
-transmission_download_dir = ${transmission_download_dir}
-EOL
-docker build -t transmission_mgmt_bot_image .
-docker run -dit --restart unless-stopped --net=host --name=transmission_mgmt_bot -v transmission_mgmt_bot_app:/app transmission_mgmt_bot_image
+# git clone https://github.com/liamniou/transmission_mgmt_bot && cd transmission_mgmt_bot
+# cat > ./app/config << EOL
+# [telegram]
+# token = ${transmission_management_bot_token}
+# [transmission]
+# transmission_host = ${transmission_host}
+# transmission_port = ${transmission_port}
+# transmission_user = ${transmission_user}
+# transmission_password = ${transmission_password}
+# transmission_download_dir = ${transmission_download_dir}
+# EOL
+# docker build -t transmission_mgmt_bot_image .
+# docker run -dit --restart unless-stopped --net=host --name=transmission_mgmt_bot -v transmission_mgmt_bot_app:/app transmission_mgmt_bot_image
 
 cd /bots
 
