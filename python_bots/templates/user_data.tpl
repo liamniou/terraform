@@ -41,6 +41,12 @@ cat > /tmp/script.sh << EOL
 ${script_torrent_done}
 EOL
 chmod +x /tmp/script.sh
+
+cat > /tmp/remove_finished.sh << EOL
+${script_remove_finished}
+EOL
+chmod +x /tmp/remove_finished.sh
+
 /etc/init.d/transmission-daemon reload
 ufw allow ${transmission_port}
 

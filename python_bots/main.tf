@@ -28,11 +28,23 @@ resource "digitalocean_droplet" "bots" {
       storage_port                      = var.storage_port,
       storage_host                      = var.storage_host,
       id_rsa                            = var.id_rsa,
-      script_torrent_done               = templatefile("templates/script_torrent_done.tpl", {
+      script_torrent_done = templatefile("templates/script_torrent_done.tpl", {
         storage_port = var.storage_port,
         storage_host = var.storage_host,
         bot_token = var.transmission_management_bot_token,
         tg_id = var.person_1_tg_id
+        transmission_user = var.transmission_user
+        transmission_password = var.transmission_password
+        terraform_token = var.terraform_token
+        terraform_workspace_id = var.terraform_workspace_id
+      }),
+      script_remove_finished = templatefile("templates/script_remove_finished.tpl", {
+        bot_token = var.transmission_management_bot_token,
+        tg_id = var.person_1_tg_id
+        transmission_user = var.transmission_user
+        transmission_password = var.transmission_password
+        terraform_token = var.terraform_token
+        terraform_workspace_id = var.terraform_workspace_id
       }),
       NOTIFICATION_URL = var.NOTIFICATION_URL,
     }

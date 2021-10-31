@@ -73,6 +73,14 @@ variable "storage_port" {
   description = "Remote storage port for SSH"
 }
 
+variable "terraform_token" {
+  description = "Token to access Terraform cloud API"
+}
+
+variable "terraform_workspace_id" {
+  description = "ID of workspace in Terraform cloud"
+}
+
 // variable "rutracker_notifier_bot_token" {
 //   description = "Telegram bot token for rutracker_notifier_bot"
 // }
