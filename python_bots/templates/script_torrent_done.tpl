@@ -28,13 +28,13 @@ ssh -i ~/.ssh/id_rsa pi@${storage_host} -p ${storage_port} "bash /home/pi/script
 send_message_to_bot "\$TR_TORRENT_NAME transfer to Plex has been finished"
 rm -rf \$TR_TORRENT_DIR
 
-# sh /tmp/remove_finished.sh
+# sh /tmp/remove_finished.sh Doesn't work due to some permissions issue
 
 DIR="/tmp/downloads"
 if [ -d "\$DIR" ]
 then
 	if [ "\$(ls -A \$DIR)" ]; then
-     send_message_to_bot "Downloads dir is not empty, skipping destruction"
+    send_message_to_bot "Downloads dir is not empty, skipping destruction"
 	else
     destroy
 	fi
