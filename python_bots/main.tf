@@ -2,13 +2,13 @@ resource "digitalocean_droplet" "bots" {
   image    = "docker-20-04"
   name     = "bots"
   region   = "ams3"
-  size     = "s-1vcpu-1gb"
+  size     = "s-2vcpu-4gb"
   ssh_keys = ["29239323"]
 
   user_data = templatefile(
     "templates/user_data.tpl", {
       shared_budget_bot_token           = var.shared_budget_bot_token,
-      pickle_gdrive_id                  = var.shared_budget_bot_pickle_gdrive_id, 
+      pickle_gdrive_id                  = var.shared_budget_bot_pickle_gdrive_id,
       person_1_tg_id                    = var.person_1_tg_id,
       person_2_tg_id                    = var.person_2_tg_id,
       scope                             = var.scope,
