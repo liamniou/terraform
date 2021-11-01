@@ -70,3 +70,5 @@ cd /bots
 # sweden_resellers_scrapper bot
 # docker pull liamnou/sweden_resellers_scrapper:debian-amd64
 # docker run -dit --restart always --name ps5_crawler -e NOTIFICATION_URL=${NOTIFICATION_URL} -e CHECK_INTERVAL=270 -e CHROME_EXECUTABLE_PATH=/usr/bin/google-chrome-stable liamnou/sweden_resellers_scrapper:debian-amd64
+
+curl -X POST -H 'Content-Type: application/json' -d '{"chat_id": "${person_1_tg_id}", "text": "DO Instance has been started"}' https://api.telegram.org/bot${transmission_management_bot_token}/sendMessage
