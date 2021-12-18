@@ -2,93 +2,27 @@ variable "do_token" {
   description = "DigitalOcean API access token"
 }
 
-# Shared Budget Bot
-
-variable "shared_budget_bot_pickle_gdrive_id" {
-  description = "Google Sheets pickle ID"
+variable "workspace_id" {
+  description = "ID of Terraform cloud workspace"
 }
 
-variable "shared_budget_bot_token" {
-  description = "Telegram bot token for Shared Budget bot"
+variable "tf_cloud_token" {
+  description = "Token to access Terraform cloud account"
 }
 
-variable "person_1_tg_id" {
-  description = "Shared Budget bot person_1 Telegram ID"
+variable "best_wines_tg_token" {
+  description = "Telegram bot token of best_wines_sweden_bot"
 }
 
-variable "person_2_tg_id" {
-  description = "Shared Budget bot person_2 Telegram ID"
+variable "best_wines_chat_id" {
+  description = "ID of the chat that bot will send messages to"
 }
 
-variable "scope" {
-  description = "Shared Budget bot Google Sheets Scope URL"
+variable "chrome_timeout" {
+  description = "Timeout in ms that Chrome wait for a page to load"
+  default     = 10000
 }
 
-variable "spreadsheet_id" {
-  description = "Shared Budget bot Google Sheets Spreadsheet ID"
-}
-
-variable "sheet_id" {
-  description = "Shared Budget bot Google Sheets Sheet ID"
-}
-
-variable "transmission_management_bot_token" {
-  description = "Telegram bot token for Transmission management bot"
-}
-
-variable "transmission_host" {
-  default     = "localhost" 
-  description = "Transmission host"
-}
-
-variable "transmission_port" {
-  default = "9091"
-  description = "Transmission port"
-}
-
-variable "transmission_user" {
-  default     = "transmission"
-  description = "Transmission user"
-}
-
-variable "transmission_password" {
-  default     = "transmission"
-  description = "Transmission password"
-}
-
-variable "transmission_download_dir" {
-  default     = "/tmp/downloads"
-  description = "Transmission download dir"
-}
-
-variable "id_rsa" {
-  description = "Private RSA key"
-}
-
-variable "storage_host" {
-  description = "Remote storage hostname for SSH"
-}
-
-variable "storage_port" {
-  description = "Remote storage port for SSH"
-}
-
-variable "terraform_token" {
-  description = "Token to access Terraform cloud API"
-}
-
-variable "terraform_workspace_id" {
-  description = "ID of workspace in Terraform cloud"
-}
-
-// variable "rutracker_notifier_bot_token" {
-//   description = "Telegram bot token for rutracker_notifier_bot"
-// }
-
-// variable "mongo_connection_string" {
-// }
-
-# Scrapper bot
-variable "NOTIFICATION_URL" {
-  description = "API endpoint to send notification message to"
+variable "personal_tg_id" {
+  description = "Telegram ID of a user to send notification messages to"
 }
