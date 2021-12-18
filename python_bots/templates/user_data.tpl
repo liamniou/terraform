@@ -13,6 +13,6 @@ apt install -y gconf-service libasound2 libatk1.0-0 libc6 libcairo2 libcups2 lib
 
 TELEGRAM_BOT_TOKEN=${best_wines_tg_token} TELEGRAM_CHAT_ID=${best_wines_chat_id} CHROME_TIMEOUT=${chrome_timeout} python3 app/best_wines_sweden.py || true
 
-WORKSPACE_ID=${workspace_id} TF_CLOUD_TOKEN=${tf_cloud_token} IS_DESTROY=True python3 trigger_terraform_workspace.py
+WORKSPACE_ID=${workspace_id} TF_CLOUD_TOKEN=${tf_cloud_token} IS_DESTROY=true python3 trigger_terraform_workspace.py
 
 curl -X POST -H 'Content-Type: application/json' -d '{"chat_id": "${personal_tg_id}", "text": "DO Instance has been triggered for destroy"}' https://api.telegram.org/bot${best_wines_tg_token}/sendMessage
