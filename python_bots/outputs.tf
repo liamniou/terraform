@@ -1,3 +1,3 @@
 output "ip" {
-  value = digitalocean_droplet.bots.ipv4_address
+  value = digitalocean_droplet.best_wines_bot.ipv4_address
 }
