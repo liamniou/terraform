@@ -17,6 +17,8 @@ destroy() {
 REMOTE_DIR="/mnt/hdd/downloads"
 LOG_FILE="/tmp/transmission.log"
 
+find \$TR_TORRENT_DIR -name "*.part" -type f -delete
+
 send_message_to_bot "\$TR_TORRENT_NAME transfer to Plex has been started"
 
 ssh -i ~/.ssh/id_rsa pi@${storage_host} -p ${storage_port} "echo '\$TR_TORRENT_DIR transfer started' >> \$LOG_FILE"
