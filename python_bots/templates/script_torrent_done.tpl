@@ -14,7 +14,7 @@ destroy() {
     https://app.terraform.io/api/v2/runs
 }
 
-REMOTE_DIR="/mnt/hdd/downloads"
+REMOTE_DIR="/Users/admin/Plex/downloads"
 LOG_FILE="/tmp/transmission.log"
 
 find \$TR_TORRENT_DIR -name "*.part" -type f -delete
