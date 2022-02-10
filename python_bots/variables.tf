@@ -18,6 +18,10 @@ variable "best_wines_chat_id" {
   description = "ID of the chat that bot will send messages to"
 }
 
+variable "telegraph_token" {
+  description = "Telegraph token of best_wines_sweden_bot"
+}
+
 variable "chrome_timeout" {
   description = "Timeout in ms that Chrome wait for a page to load"
   default     = 10000

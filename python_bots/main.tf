@@ -13,6 +13,7 @@ resource "digitalocean_droplet" "best_wines_bot" {
       personal_tg_id      = var.personal_tg_id
       tf_cloud_token      = var.tf_cloud_token
       workspace_id        = var.workspace_id
+      telegraph_token     = var.telegraph_token
     }
   )
 }
