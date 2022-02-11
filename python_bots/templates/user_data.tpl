@@ -21,4 +21,4 @@ docker run -dit \
 docker wait best_wines
 
 curl -X POST -H 'Content-Type: application/json' -d '{"chat_id": "${personal_tg_id}", "text": "DO Instance has been triggered for destroy"}' https://api.telegram.org/bot${best_wines_tg_token}/sendMessage
-# destroy
+destroy
