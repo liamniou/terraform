@@ -16,7 +16,7 @@ docker run -dit \
   --env=TELEGRAM_BOT_TOKEN=${best_wines_tg_token} \
   --env=TELEGRAM_CHAT_ID=${best_wines_chat_id} \
   --env=TELEGRAPH_TOKEN=${telegraph_token} \
-  liamnou/best_wines_sweden_amd64:14
+  liamnou/best_wines_sweden_amd64:15
 
 docker wait best_wines
 
